@@ -38,4 +38,10 @@ public class CharacterMovement : MonoBehaviour
         Debug.Log("Sneak!");
         
     }
+    
+    void OnSprint()
+    {
+        Debug.Log("Sprint!");
+        
+    }
 }
