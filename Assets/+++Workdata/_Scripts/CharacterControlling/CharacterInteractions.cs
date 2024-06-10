@@ -28,6 +28,12 @@ public class CharacterInteractions : MonoBehaviour
             Debug.Log("You loose!");
             uiLevelManager.OnGameLose();
         }
+
+        if (other.CompareTag("Coin"))
+        {
+            uiLevelManager.AddCoin();
+            Destroy(other.gameObject);
+        }
     }
     
 }

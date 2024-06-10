@@ -19,6 +19,8 @@ public class UIMenu : MonoBehaviour
     [SerializeField] private Button buttonLevel3;
 
     [SerializeField] private string[] LevelNames;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,34 @@ public class UIMenu : MonoBehaviour
         
         buttonLevelSelection.onClick.AddListener(ShowLevelSelection);
         buttonBackToMain.onClick.AddListener(ShowMainPanel);
-        buttonNewGame.onClick.AddListener(StartNewGame);
+        buttonNewGame.onClick.AddListener(LoadLevel1);
         
+        buttonLevel1.onClick.AddListener(LoadLevel1);
+        buttonLevel2.onClick.AddListener(LoadLevel2);
+        buttonLevel3.onClick.AddListener(LoadLevel3);
+
+        
+        //man kann den Button nicht benutzen
+        buttonLevel2.interactable = false;
+        if (PlayerPrefs.HasKey(LevelNames[1]))
+        {
+            //wenn man das 1. Level geschafft hat, kann man das 2. Level anklicken
+            if (PlayerPrefs.GetInt(LevelNames[1]) == 1)
+            {
+                buttonLevel2.interactable = true;
+            }
+        }
+        
+        //man kann den Button nicht benutzen
+        buttonLevel3.interactable = false;
+        if (PlayerPrefs.HasKey(LevelNames[2]))
+        {
+            //wenn man das 1. Level geschafft hat, kann man das 3. Level anklicken
+            if (PlayerPrefs.GetInt(LevelNames[2]) == 1)
+            {
+                buttonLevel3.interactable = true;
+            }
+        }
     }
 
     void ShowLevelSelection()
@@ -42,9 +70,20 @@ public class UIMenu : MonoBehaviour
         panelLevelSelection.HideCanvasGroup();
     }
 
-    void StartNewGame()
+    void LoadLevel1()
     {
         //Load Level 1
         SceneManager.LoadScene(LevelNames[0]);
+    }
+    void LoadLevel2()
+    {
+        //Load Level 2
+        SceneManager.LoadScene(LevelNames[1]);
+    }
+     void LoadLevel3()
+    {
+    //Load Level 3
+    SceneManager.LoadScene(LevelNames[2]);
+
     }
 }

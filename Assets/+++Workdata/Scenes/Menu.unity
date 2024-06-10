@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 131694136}
   - component: {fileID: 131694138}
   m_Layer: 5
-  m_Name: Level2
+  m_Name: ButtonLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,7 +738,7 @@ GameObject:
   - component: {fileID: 864705248}
   - component: {fileID: 864705247}
   m_Layer: 5
-  m_Name: Level3
+  m_Name: ButtonLevel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1134,8 +1134,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2131389047}
   - {fileID: 1287698828}
+  - {fileID: 2131389047}
   - {fileID: 131694135}
   - {fileID: 864705250}
   m_Father: {fileID: 1121357587}
@@ -1453,7 +1453,10 @@ MonoBehaviour:
   buttonLevel1: {fileID: 2131389050}
   buttonLevel2: {fileID: 131694138}
   buttonLevel3: {fileID: 864705247}
-  LevelNames: []
+  LevelNames:
+  - Level 1
+  - Level 2
+  - Level 3
 --- !u!1 &1287698827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,7 +2273,7 @@ GameObject:
   - component: {fileID: 2131389048}
   - component: {fileID: 2131389050}
   m_Layer: 5
-  m_Name: Level1
+  m_Name: ButtonLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
