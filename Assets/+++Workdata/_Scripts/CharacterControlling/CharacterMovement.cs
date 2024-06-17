@@ -8,23 +8,28 @@ public class CharacterMovement : MonoBehaviour
 {
    // private int frameCounter = 0;
     //private int jumpCounter = 0;
-
+    
+    //Character hinzugefügt
     private Rigidbody2D rb;
     private float inputDirection;
     
-    //Serialize Field zeigt Variablen im Inspektor an 
+    //SerialzeFields fügen Variablen in den Inspector hinzu und man kann dann die InGame Elemente reinziehen und sie sind verbunden
     [SerializeField] private  float jumpForce = 10f;
+    [SerializeField] private int firstJumpCount = 2;
+    private int JumpCount;
     [SerializeField] private  float movementSpeed = 10f;
+    
 
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask layerGroundcheck;
-
+    
     private bool isFacingRight = true;
     
     // Start is called before the first frame update
     void Start()
     {
+        //Character hinzugefügt
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;           //character dreht sich nicht mehr
         Debug.Log("Start");
@@ -48,13 +53,16 @@ public class CharacterMovement : MonoBehaviour
     { //Guckt ob sich der Character mit dem Ground überlappt
      if(Physics2D.OverlapCircle(groundCheckPosition.position,groundCheckRadius, layerGroundcheck))
 
-     { //Guckt ob sich der Character mit dem Ground überlappt
-   
+     { //DoppelSprung hinzugefügt
+         JumpCount = firstJumpCount;
+     }
+     if(JumpCount > 0)
+     {
          rb.velocity = new Vector2(0f, jumpForce);
-     Debug.Log("Jump!");
+         Debug.Log("Jump!");
      }
     }
-
+    
     void OnMove(InputValue inputValue)
     {
         inputDirection = inputValue.Get<float>();
@@ -65,6 +73,7 @@ public class CharacterMovement : MonoBehaviour
         // zwei || sind ein oder ( eins von beiden muss erfüllt sein)
         if (inputDirection > 0 && !isFacingRight)
         {
+            // es wird eingefügt, dass der Character sich dreht, je nachdem in welche Richtung man geht
             Flip();
         } else if (inputDirection < 0 && isFacingRight)
         {
@@ -90,10 +99,11 @@ public class CharacterMovement : MonoBehaviour
     }
     
     void OnSprint(InputValue inputValue)
+    // man kann in Game noch nicht sprinten, es wird aber in der Console angezeigt, wenn man Shift drückt
     {
         float isSprinting = inputValue.Get<float>();
         Debug.Log("Sprint!" + isSprinting);
-       
-        
     }
+
+  
 }

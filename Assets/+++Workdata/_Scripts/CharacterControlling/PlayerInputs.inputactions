@@ -58,7 +58,7 @@
                     "name": "",
                     "id": "4e306ff6-871e-4960-9576-c14c00d99a10",
                     "path": "<Keyboard>/shift",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Sprint",

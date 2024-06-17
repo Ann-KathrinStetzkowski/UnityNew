@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class UIMenu : MonoBehaviour
 {
+    //SerialzeFields fügen in dem Fall die Buttons oder Panel(Variablen) in den Inspector hinzu
+    //hinzu und man kann dann die InGame Elemente reinziehen und sie sind verbunden
     [SerializeField] private CanvasGroup panelMain;
     [SerializeField] private Button buttonNewGame;
     [SerializeField] private Button buttonLevelSelection;
@@ -27,6 +29,7 @@ public class UIMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Das MainMenu wird gezeigt mit allen Buttons und es wird festgelegt, was die Buttons machen 
         ShowMainPanel();
         
         buttonLevelSelection.onClick.AddListener(ShowLevelSelection);
@@ -63,12 +66,14 @@ public class UIMenu : MonoBehaviour
     }
 
     void ShowLevelSelection()
+    // Die LevelSelection wird angezeigt und MainMenu wird versteckt
     {
         panelMain.HideCanvasGroup();
         panelLevelSelection.ShowCanvasGroup();
     }
 
     void ShowMainPanel()
+    // Das MainMenu wird angezeigt und die LevelSelection wird versteckt
     {
         panelMain.ShowCanvasGroup();
         panelLevelSelection.HideCanvasGroup();
@@ -76,22 +81,23 @@ public class UIMenu : MonoBehaviour
 
     void LoadLevel1()
     {
-        //Load Level 1
+        //Das erste Level wird geladen 
         SceneManager.LoadScene(LevelNames[0]);
     }
     void LoadLevel2()
     {
-        //Load Level 2
+        //Das zweite Level wird geladen 
         SceneManager.LoadScene(LevelNames[1]);
     }
      void LoadLevel3()
     {
-    //Load Level 3
-    SceneManager.LoadScene(LevelNames[2]);
+        //Das dritte Level wird geladen
+       SceneManager.LoadScene(LevelNames[2]);
 
     }
 
     void ExitGame()
+    //wenn man auf ExitGame im MainMenu geht wird das Spiel nun geschlossen
     {
         Application.Quit();
     }

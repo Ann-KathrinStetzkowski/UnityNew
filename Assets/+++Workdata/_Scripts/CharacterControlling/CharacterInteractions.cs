@@ -17,19 +17,23 @@ public class CharacterInteractions : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
+    //Wenn man mit einem Objekt zusammenprallt, wird etwas ausgelöst
     {
         if (other.CompareTag("Goal"))
+            //Wenn man mit Objekten zusammenprallt, die den Tag "Goal" haben, gewinnt man (man kommt in das Win Panel)
         {
             Debug.Log("You win!");
             uiLevelManager.OnGameWin();
         }
         if (other.CompareTag("Death"))
+            //Wenn man mit Objekten zusammenprallt, die den Tag "Death" haben, verliert man (man kommt in das Lose Panel)
         {
             Debug.Log("You loose!");
             uiLevelManager.OnGameLose();
         }
 
         if (other.CompareTag("Coin"))
+            //Wenn man mit Objekten zusammenprallt, die den Tag "Coin" haben,wird das Objekt zerstört und der CoinCounter geht hoch
         {
             uiLevelManager.AddCoin();
             Destroy(other.gameObject);
