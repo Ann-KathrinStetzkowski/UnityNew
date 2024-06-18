@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    //Variablen hinzugefügt
     private Camera mainCam;
     private Vector3 mousePos;
     public GameObject bullet;
     public Transform bulletTransform;
-    public bool canFire;
+    public bool canFire;    
     private float timer;
     public float timeBetweenFiring;
     
@@ -20,15 +21,16 @@ public class Shooting : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { // hiermit folgt man dem Mauszeiger 
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         
         Vector3 rotation = mousePos - transform.position;
-
+    //Z Rotation ist eingefroren
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
+        //TImer wird erstellt wie schnell hintereinander man schiessen kann
         if (!canFire)
         {
             timer += Time.deltaTime;
@@ -38,7 +40,7 @@ public class Shooting : MonoBehaviour
                 timer = 0;
             }
         }
-
+        //Wenn man mit der Maus klickt, kann man schiessen
         if (Input.GetMouseButton(0)&& canFire)
         {
             canFire = false;

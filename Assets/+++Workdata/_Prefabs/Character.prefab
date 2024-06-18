@@ -457,6 +457,8 @@ MonoBehaviour:
   jumpForce: 8
   firstJumpCount: 2
   movementSpeed: 5
+  sprintSpeed: 15
+  sneakSPeed: 2
   groundCheckPosition: {fileID: 8405048603303699467}
   groundCheckRadius: 0.3
   layerGroundcheck:

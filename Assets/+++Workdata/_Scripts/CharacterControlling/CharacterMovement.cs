@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     
     //Character hinzugefügt
     PlayerInput playerInput;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb; //container erstellt
     private float inputDirection;
     
     //SerialzeFields fügen Variablen in den Inspector hinzu und man kann dann die InGame Elemente reinziehen und sie sind verbunden
@@ -23,6 +23,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float sneakSPeed;
     private float tempSpeed;
 
+    //guckt ob der Spieler den Button drückt
     private float isSprinting;
     private float isSneaking;
 
@@ -44,7 +45,9 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;           //character dreht sich nicht mehr
         Debug.Log("Start");
-        
+
+        tempSpeed = movementSpeed;
+
     }
 
     // Update is called once per frame
@@ -121,8 +124,8 @@ public class CharacterMovement : MonoBehaviour
         isSneaking = inputValue.Get<float>();
     }
     
-    void OnSprint(InputValue inputValue)
-//sprinten hinzugefügt
+    void OnSprint(InputValue inputValue) 
+        //sprinten hinzugefügt
     {
         isSprinting = inputValue.Get<float>();
         Debug.Log("Sprint!" + isSprinting);
