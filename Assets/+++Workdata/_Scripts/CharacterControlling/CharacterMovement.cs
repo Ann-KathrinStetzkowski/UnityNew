@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     //private int jumpCounter = 0;
     
     //Character hinzugefügt
+    PlayerInput playerInput;
     private Rigidbody2D rb;
     private float inputDirection;
     
@@ -18,14 +19,24 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private int firstJumpCount = 2;
     private int JumpCount;
     [SerializeField] private  float movementSpeed = 10f;
-    
+    [SerializeField] private float sprintSpeed = 15f;
+    [SerializeField] private float sneakSPeed;
+    private float tempSpeed;
+
+    private float isSprinting;
+    private float isSneaking;
 
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask layerGroundcheck;
     
     private bool isFacingRight = true;
-    
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +44,25 @@ public class CharacterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;           //character dreht sich nicht mehr
         Debug.Log("Start");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       // frameCounter = frameCounter + 1;
-//        Debug.Log("Update! Framenumber:" + frameCounter);
+        //Sprintconditions hinzugefügt bzw. Speedconditions allgemein
+        if (isSprinting > 0)
+        {
+            movementSpeed = sprintSpeed;
+        }
+        else if (isSprinting == 0 && isSneaking == 0)
+        {
+            movementSpeed = tempSpeed;
+        }
+        else if (isSneaking > 0)
+        {
+            movementSpeed = sneakSPeed;
+        }
     }
 
     
@@ -60,6 +83,7 @@ public class CharacterMovement : MonoBehaviour
      {
          rb.velocity = new Vector2(0f, jumpForce);
          Debug.Log("Jump!");
+         JumpCount = JumpCount - 1;
      }
     }
     
@@ -91,17 +115,16 @@ public class CharacterMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
 
     }
-    void OnSneak()
+    void OnSneak(InputValue inputValue)
+    // sneaken hinzugefügt
     {
-        
-        Debug.Log("Sneak!" );
-        
+        isSneaking = inputValue.Get<float>();
     }
     
     void OnSprint(InputValue inputValue)
-    // man kann in Game noch nicht sprinten, es wird aber in der Console angezeigt, wenn man Shift drückt
+//sprinten hinzugefügt
     {
-        float isSprinting = inputValue.Get<float>();
+        isSprinting = inputValue.Get<float>();
         Debug.Log("Sprint!" + isSprinting);
     }
 
